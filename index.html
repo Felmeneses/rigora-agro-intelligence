@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rigora Agro Intelligence | Plataforma de Inteligência Agrícola</title>
+  
+  <!-- Fontes Corporativas (Inter) com fallback seguro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Estilos da Aplicação -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ======================================================================
+       1. TELA DE LOGIN (DIVIDIDA EM DUAS ÁREAS NO DESKTOP)
+       ====================================================================== -->
+  <section id="view-login" class="login-view">
+    <!-- Painel Esquerdo: Identidade Visual Institucional -->
+    <div class="login-brand-panel">
+      <div class="brand-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        Global Solution 2026 • FIAP • CitizenTech
+      </div>
+
+      <div class="brand-hero-content">
+        <div class="brand-logo-title">
+          <svg class="brand-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+          </svg>
+          Rigora Agro Intelligence
+        </div>
+        <h1 class="brand-phrase">
+          "Inteligência para transformar <strong>dados em decisões</strong> no campo."
+        </h1>
+        <p class="brand-description">
+          Apoiando pequenos cafeicultores de Minas Gerais com a democratização de dados agronômicos, econômicos e climáticos em uma interface simples, robusta e orientada a resultados.
+        </p>
+      </div>
+
+      <div class="brand-footer">
+        <span>© 2026 Rigora Agro Intelligence</span>
+        <span>•</span>
+        <span>Cafeicultura de Precisão e Inclusão Tecnológica</span>
+      </div>
+    </div>
+
+    <!-- Painel Direito: Formulário de Autenticação Demonstrativo -->
+    <div class="login-form-panel">
+      <div class="login-card">
+        <div class="login-card-header">
+          <h2>Acesso à Plataforma</h2>
+          <p>Selecione suas credenciais demonstrativas para acessar o painel</p>
+        </div>
+
+        <div class="login-demo-alert">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <div>
+            <strong>Ambiente Demonstrativo</strong>
+            <div>Acesso pré-configurado para avaliação da Global Solution. Não é necessário digitar senhas reais.</div>
+          </div>
+        </div>
+
+        <form id="form-login" class="login-form" onsubmit="event.preventDefault(); RigoraApp.login();">
+          <div class="form-group">
+            <label for="login-email">E-mail do Produtor / Cooperativa</label>
+            <input type="email" id="login-email" class="form-input" value="cafeicultor.cerrado@rigora.agro" required>
+          </div>
+
+          <div class="form-group">
+            <label for="login-password">Senha de Acesso</label>
+            <input type="password" id="login-password" class="form-input" value="••••••••" required>
+          </div>
+
+          <button type="submit" class="btn-primary" id="btn-login-submit">
+            <span>Entrar no Dashboard</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </form>
+
+        <p class="login-disclaimer">
+          Ambiente demonstrativo • Sem validação de credenciais de produção
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       2. LAYOUT INTERNO DA APLICAÇÃO (SIDEBAR + TOPBAR + TELAS)
+       ====================================================================== -->
+  <div id="view-app" class="app-layout" style="display: none;">
+    
+    <!-- Menu Lateral Esquerdo Fixo -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="#" class="sidebar-logo" onclick="event.preventDefault(); RigoraApp.navigate('overview');">
+          <svg class="sidebar-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+          </svg>
+          <span>Rigora Agro</span>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <!-- 1. Visão Geral -->
+        <a href="#overview" class="nav-link active" id="nav-overview" onclick="RigoraApp.navigate('overview', event)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="9"></rect>
+            <rect x="14" y="3" width="7" height="5"></rect>
+            <rect x="14" y="12" width="7" height="9"></rect>
+            <rect x="3" y="16" width="7" height="5"></rect>
+          </svg>
+          <span>Visão Geral</span>
+        </a>
+
+        <!-- 2. Propriedades e Safras -->
+        <a href="#properties" class="nav-link" id="nav-properties" onclick="RigoraApp.navigate('properties', event)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span>Propriedades e Safras</span>
+        </a>
+
+        <!-- 3. Inteligência e Projeções -->
+        <a href="#intelligence" class="nav-link" id="nav-intelligence" onclick="RigoraApp.navigate('intelligence', event)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          <span>Inteligência e Projeções</span>
+        </a>
+
+        <!-- 4. Automações -->
+        <a href="#automations" class="nav-link" id="nav-automations" onclick="RigoraApp.navigate('automations', event)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polyline>
+          </svg>
+          <span>Automações</span>
+        </a>
+
+        <!-- 5. Fontes de Dados -->
+        <a href="#sources" class="nav-link" id="nav-sources" onclick="RigoraApp.navigate('sources', event)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+          </svg>
+          <span>Fontes de Dados</span>
+        </a>
+      </nav>
+
+      <!-- 6. Sair -->
+      <div class="sidebar-footer">
+        <a href="#logout" class="nav-link nav-link-logout" onclick="RigoraApp.logout(event)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>Sair</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Área Principal de Conteúdo -->
+    <div class="main-wrapper">
+      
+      <!-- Barra Superior (Topbar) -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu-toggle" id="btn-mobile-menu" aria-label="Abrir Menu" onclick="RigoraApp.toggleMobileSidebar()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <h2 class="topbar-title" id="page-current-title">Visão Geral</h2>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Seletor de Propriedade -->
+          <div class="topbar-selector">
+            <select class="custom-select" id="select-property" onchange="RigoraApp.onPropertyChange(this.value)">
+              <option value="prop-01">Fazenda Santa Rita do Cerrado (Patrocínio - MG)</option>
+            </select>
+          </div>
+
+          <!-- Safra Selecionada -->
+          <div class="topbar-selector">
+            <select class="custom-select" id="select-safra" onchange="RigoraApp.onSafraChange(this.value)">
+              <option value="2025/2026" selected>Safra 2025/2026 (Atual)</option>
+              <option value="2024/2025">Safra 2024/2025 (Concluída)</option>
+              <option value="2023/2024">Safra 2023/2024 (Histórica)</option>
+            </select>
+          </div>
+
+          <!-- Ícone de Notificações com Dropdown -->
+          <div class="notif-wrapper">
+            <button class="icon-btn" id="btn-notifications" aria-label="Notificações" onclick="RigoraApp.toggleNotifications()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+              </svg>
+              <span class="notif-badge" id="notif-count">2</span>
+            </button>
+            <div class="notif-dropdown" id="notif-dropdown">
+              <div class="notif-dropdown-header">
+                <h4>Notificações da Safra</h4>
+                <span class="demo-tag">Tempo Real</span>
+              </div>
+              <div id="notif-items-list">
+                <!-- Inserido dinamicamente via JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Identificação "Usuário Demo" -->
+          <div class="user-profile">
+            <div class="avatar">UD</div>
+            <div class="user-info">
+              <span class="user-name">Usuário Demo</span>
+              <span class="user-role">Pequeno Cafeicultor</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ==================================================================
+           TELA 1: VISÃO GERAL
+           ================================================================== -->
+      <main id="tab-overview" class="content-view active">
+        <!-- Banner de Dados Demonstrativos -->
+        <div class="demo-banner">
+          <div>
+            <strong>Ambiente de Demonstração Interativa</strong> — Dados simulados para cafeicultura de precisão no Cerrado Mineiro (FIAP GS 2026).
+          </div>
+          <span class="demo-tag">Dados Demonstrativos</span>
+        </div>
+
+        <!-- Quatro Cards Principais de Indicadores -->
+        <div class="kpi-grid">
+          <!-- Card 1: Área Cultivada -->
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-title">Área Cultivada</span>
+              <div class="kpi-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 6l9-4 9 4-9 4-9-4zm0 6l9 4 9-4m-18 6l9 4 9-4"/>
+                </svg>
+              </div>
+            </div>
+            <div class="kpi-value" id="kpi-area">42,5 ha</div>
+            <div class="kpi-footer">
+              <span class="kpi-badge neutral">3 Talhões</span>
+              <span>Café Arábica</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Custo Estimado da Safra -->
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-title">Custo Estimado da Safra</span>
+              <div class="kpi-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="1" x2="12" y2="23"></line>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="kpi-value" id="kpi-cost">R$ 412.250</div>
+            <div class="kpi-footer">
+              <span class="kpi-badge neutral" id="kpi-cost-ha">R$ 9.700 / ha</span>
+              <span>Safra 2025/2026</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Produtividade Estimada -->
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-title">Produtividade Estimada</span>
+              <div class="kpi-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+              </div>
+            </div>
+            <div class="kpi-value" id="kpi-productivity">38,4 sc/ha</div>
+            <div class="kpi-footer">
+              <span class="kpi-badge positive">↑ +9,7%</span>
+              <span>vs média regional (35 sc/ha)</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Alertas Ativos -->
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-title">Alertas Ativos</span>
+              <div class="kpi-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                  <line x1="12" y1="9" x2="12" y2="13"></line>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+              </div>
+            </div>
+            <div class="kpi-value" id="kpi-alerts">2 Alertas</div>
+            <div class="kpi-footer">
+              <span class="kpi-badge alert">Requer Atenção</span>
+              <span>Solo & Orçamento</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Estrutura Principal 65% / 35% -->
+        <div class="dashboard-columns">
+          
+          <!-- Área Principal (65%) -->
+          <div class="dashboard-card">
+            <div class="card-header-flex">
+              <div>
+                <h3 class="card-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                    <polyline points="17 6 23 6 23 12"></polyline>
+                  </svg>
+                  Evolução dos Custos Mensais (Safra 2025/2026)
+                </h3>
+                <p class="card-subtitle">Despesas acumuladas e projetadas por mês na cafeicultura</p>
+              </div>
+              <span class="demo-tag">Dados Demonstrativos</span>
+            </div>
+            <div class="chart-container" id="chart-monthly-costs"></div>
+
+            <div style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--color-border-subtle);">
+              <div class="card-header-flex">
+                <div>
+                  <h3 class="card-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                      <line x1="8" y1="21" x2="16" y2="21"></line>
+                      <line x1="12" y1="17" x2="12" y2="21"></line>
+                    </svg>
+                    Produtividade Histórica por Safra (sc/ha)
+                  </h3>
+                  <p class="card-subtitle">Evolução do rendimento médio da Fazenda Santa Rita do Cerrado</p>
+                </div>
+              </div>
+              <div class="chart-container" id="chart-historical-productivity-overview"></div>
+            </div>
+          </div>
+
+          <!-- Área Secundária (35%) -->
+          <div class="side-stack">
+            <!-- Card Alertas Recentes -->
+            <div class="dashboard-card">
+              <div class="card-header-flex">
+                <h3 class="card-title">Alertas Recentes</h3>
+                <span class="demo-tag">Monitoramento</span>
+              </div>
+              <div class="alert-list" id="overview-alerts-list">
+                <!-- Preenchido dinamicamente -->
+              </div>
+            </div>
+
+            <!-- Card Condições Climáticas -->
+            <div class="dashboard-card" id="weather-card">
+              <div class="card-header-flex">
+                <div>
+                  <h3 class="card-title">Condições Climáticas</h3>
+                  <p class="card-subtitle" id="weather-subtitle">Patrocínio - MG (INMET A522)</p>
+                </div>
+                <span class="status-pill success" id="weather-status-badge">
+                  <span class="status-dot"></span> Monitorado
+                </span>
+              </div>
+
+              <div class="weather-widget">
+                <div class="weather-header">
+                  <div class="weather-temp-box">
+                    <span class="weather-temp" id="weather-temp-val">24.5</span>
+                    <span class="weather-unit" id="weather-unit-val">°C</span>
+                  </div>
+                  <div style="font-size: 12px; color: var(--color-text-muted); text-align: right;" id="weather-minmax-box">
+                    <div>Min: 17.2°C</div>
+                    <div>Max: 29.8°C</div>
+                  </div>
+                </div>
+
+                <div class="weather-stats" id="weather-stats-grid">
+                  <div>Chuva Acum. Mês: <span class="weather-stat-val">142,4 mm</span></div>
+                  <div>Umidade do Ar: <span class="weather-stat-val">68%</span></div>
+                  <div>Velocidade Vento: <span class="weather-stat-val">11,5 km/h</span></div>
+                  <div>Méd. Histórica: <span class="weather-stat-val">165,0 mm</span></div>
+                </div>
+
+                <div class="weather-recommendation" id="weather-recommendation-box">
+                  <strong>Recomendação Agronômica:</strong> Fase de enchimento de grãos com umidade adequada. Manter monitoramento para ferrugem em baixadas.
+                </div>
+              </div>
+
+              <div style="margin-top: 16px;">
+                <button class="btn-accent" style="width: 100%;" onclick="RigoraApp.navigate('intelligence', event)">
+                  <span>Visualizar Análises e Projeções</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabela Resumida de Custos por Categoria (Parte Inferior) -->
+        <div class="dashboard-card" style="margin-top: 8px;">
+          <div class="card-header-flex">
+            <div>
+              <h3 class="card-title">Composição dos Custos da Safra por Categoria</h3>
+              <p class="card-subtitle">Detalhamento dos insumos, serviços e operações da safra atual</p>
+            </div>
+            <button class="btn-secondary" onclick="RigoraApp.navigate('intelligence', event)">
+              Ver Projeções Detalhadas
+            </button>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Categoria de Despesa</th>
+                  <th>Custo Total (R$)</th>
+                  <th>% do Custo</th>
+                  <th>Custo Médio (R$/ha)</th>
+                  <th>Classificação</th>
+                </tr>
+              </thead>
+              <tbody id="overview-cost-table-body">
+                <!-- Linhas preenchidas via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+
+      <!-- ==================================================================
+           TELA 2: PROPRIEDADES E SAFRAS
+           ================================================================== -->
+      <main id="tab-properties" class="content-view">
+        <div class="demo-banner">
+          <div>
+            <strong>Propriedade Demonstrativa</strong> — Localizada em Minas Gerais (Região do Cerrado Mineiro), com talhões e custos simulados.
+          </div>
+          <span class="demo-tag">Dados Demonstrativos</span>
+        </div>
+
+        <!-- Perfil da Propriedade -->
+        <div class="property-profile-card">
+          <div class="card-header-flex" style="margin-bottom: 0;">
+            <div>
+              <h3 class="card-title" style="font-size: 20px;">Fazenda Santa Rita do Cerrado</h3>
+              <p class="card-subtitle">Produtor Parceiro • Cooperativa dos Cafeicultores de Patrocínio</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <span class="status-pill success"><span class="status-dot"></span> Café Arábica Certificado</span>
+              <button class="btn-accent" onclick="RigoraApp.openNewActivityModal()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Nova Atividade</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="property-details-grid">
+            <div class="detail-item">
+              <span class="detail-label">Município e Estado</span>
+              <span class="detail-value">Patrocínio - MG</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Região Agrícola</span>
+              <span class="detail-value">Cerrado Mineiro (D.O.)</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Cultura Principal</span>
+              <span class="detail-value">Café Arábica (Catuaí / Bourbon)</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Área Cultivada / Total</span>
+              <span class="detail-value">42,5 ha / 48,0 ha</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Safra Corrente</span>
+              <span class="detail-value">2025/2026 (Em andamento)</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Altitude Média</span>
+              <span class="detail-value">980 metros</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Tipo de Solo</span>
+              <span class="detail-value">Latossolo Vermelho-Amarelo</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Sistema de Manejo</span>
+              <span class="detail-value">Manejo Integrado Sustentável</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabela de Talhões -->
+        <div class="dashboard-card" style="margin-bottom: 28px;">
+          <div class="card-header-flex">
+            <div>
+              <h3 class="card-title">Talhões Cadastrados na Safra Atual</h3>
+              <p class="card-subtitle">Divisão operacional da lavoura e produtividade estimada por lote</p>
+            </div>
+            <span class="demo-tag">3 Talhões Ativos</span>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Talhão</th>
+                  <th>Variedade Cultivada</th>
+                  <th>Área (ha)</th>
+                  <th>Produtividade Est.</th>
+                  <th>Custo Registrado</th>
+                  <th>Custo / ha</th>
+                  <th>Situação Atual</th>
+                </tr>
+              </thead>
+              <tbody id="talhoes-table-body">
+                <!-- Preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Histórico Recente de Atividades Registradas -->
+        <div class="dashboard-card">
+          <div class="card-header-flex">
+            <div>
+              <h3 class="card-title">Registro Recente de Atividades e Despesas</h3>
+              <p class="card-subtitle">Lançamentos de campo que compõem o custo da safra (atualizados dinamicamente na sessão)</p>
+            </div>
+            <button class="btn-secondary" onclick="RigoraApp.openNewActivityModal()">
+              + Adicionar Lançamento
+            </button>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Talhão</th>
+                  <th>Categoria</th>
+                  <th>Descrição da Operação / Insumo</th>
+                  <th>Valor Registrado</th>
+                </tr>
+              </thead>
+              <tbody id="activities-table-body">
+                <!-- Preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+
+      <!-- ==================================================================
+           TELA 3: INTELIGÊNCIA E PROJEÇÕES (3 SEÇÕES A, B, C)
+           ================================================================== -->
+      <main id="tab-intelligence" class="content-view">
+        <div class="demo-banner">
+          <div>
+            <strong>Módulo de Inteligência Agrícola</strong> — Análises históricas, benchmarking regional e simulador financeiro paramétrico para tomada de decisão.
+          </div>
+          <span class="demo-tag">Dados Demonstrativos</span>
+        </div>
+
+        <!-- SEÇÃO A: ANÁLISE HISTÓRICA -->
+        <section class="intelligence-section">
+          <span class="section-badge">Seção A • Análise Histórica</span>
+          <div class="card-header-flex" style="margin-bottom: 14px;">
+            <div>
+              <h3 class="card-title" style="font-size: 18px;">Evolução Histórica da Produtividade e Custos de Produção</h3>
+              <p class="card-subtitle">Série de 5 safras para identificação de tendências e variações de margem na cafeicultura</p>
+            </div>
+            <div class="intelligence-filters">
+              <label for="filter-historical-metric" style="font-size: 12.5px; font-weight: 600; color: var(--color-text-muted);">Métrica:</label>
+              <select class="custom-select" id="filter-historical-metric" onchange="RigoraApp.renderHistoricalCharts(this.value)">
+                <option value="productivity">Produtividade (sc/ha)</option>
+                <option value="costTotal">Custo Total da Safra (R$)</option>
+                <option value="costPerHa">Custo por Hectare (R$/ha)</option>
+                <option value="netResult">Resultado Operacional (R$)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="chart-container" id="chart-historical-intelligence"></div>
+
+          <!-- Tabela Resumo do Histórico -->
+          <div class="table-wrapper" style="margin-top: 20px;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Safra</th>
+                  <th>Produtividade</th>
+                  <th>Produção Total</th>
+                  <th>Custo Total</th>
+                  <th>Custo / ha</th>
+                  <th>Preço Médio / sc</th>
+                  <th>Receita Total</th>
+                  <th>Resultado Operacional</th>
+                </tr>
+              </thead>
+              <tbody id="historical-table-body">
+                <!-- Preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- SEÇÃO B: COMPARAÇÃO REGIONAL -->
+        <section class="intelligence-section">
+          <span class="section-badge">Seção B • Comparação Regional</span>
+          <div class="card-header-flex" style="margin-bottom: 14px;">
+            <div>
+              <h3 class="card-title" style="font-size: 18px;">Benchmarking Municipal de Produtividade (Minas Gerais)</h3>
+              <p class="card-subtitle" id="regional-subtitle">Posicionamento da propriedade em relação a municípios de destaque do café arábica mineiro</p>
+            </div>
+            <span class="status-pill success" id="regional-status-badge">
+              <span class="status-dot"></span> Desempenho +9,7% vs Média
+            </span>
+          </div>
+
+          <div class="chart-container" id="chart-regional-comparison"></div>
+
+          <!-- Tabela Comparativa Regional -->
+          <div class="table-wrapper" style="margin-top: 20px;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Município / Polo Regional</th>
+                  <th>Região de Origem</th>
+                  <th>Produtividade Média</th>
+                  <th>Custo Médio / ha</th>
+                  <th>Altitude Média</th>
+                  <th>Diferença vs Propriedade</th>
+                </tr>
+              </thead>
+              <tbody id="regional-table-body">
+                <!-- Preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- SEÇÃO C: SIMULADOR DE CENÁRIOS -->
+        <section class="intelligence-section">
+          <span class="section-badge">Seção C • Simulador de Cenários</span>
+          <div class="card-header-flex" style="margin-bottom: 14px;">
+            <div>
+              <h3 class="card-title" style="font-size: 18px;">Simulador Paramétrico de Rentabilidade da Safra</h3>
+              <p class="card-subtitle">Ajuste os parâmetros de área, produtividade, custos e cotação para projetar a margem econômica</p>
+            </div>
+          </div>
+
+          <div class="sim-disclaimer" style="margin-bottom: 24px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <div>
+              <strong>Aviso de Simulação:</strong> Este simulador utiliza fórmulas paramétricas e premissas orçamentárias declaradas. Não se trata de uma previsão validada por modelos de Machine Learning.
+            </div>
+          </div>
+
+          <div class="simulator-layout">
+            <!-- Coluna de Controles / Entradas -->
+            <div class="simulator-controls">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <span style="font-size: 14px; font-weight: 700; color: var(--color-primary);">Parâmetros da Lavoura</span>
+                <button class="btn-secondary" style="padding: 4px 10px; font-size: 11.5px;" onclick="RigoraApp.resetSimulatorDefaults()">
+                  Restaurar Padrão
+                </button>
+              </div>
+
+              <!-- 1. Área Cultivada -->
+              <div class="sim-field">
+                <div class="sim-field-header">
+                  <label class="sim-field-label" for="sim-input-area">Área Cultivada (hectares)</label>
+                  <span class="sim-field-val-display" id="disp-sim-area">42.5 ha</span>
+                </div>
+                <input type="range" id="sim-input-area" class="sim-slider" min="10" max="100" step="0.5" value="42.5" oninput="RigoraApp.onSimParamChange()">
+              </div>
+
+              <!-- 2. Produtividade Estimada -->
+              <div class="sim-field">
+                <div class="sim-field-header">
+                  <label class="sim-field-label" for="sim-input-productivity">Produtividade Estimada (sc/ha)</label>
+                  <span class="sim-field-val-display" id="disp-sim-productivity">38.4 sc/ha</span>
+                </div>
+                <input type="range" id="sim-input-productivity" class="sim-slider" min="15" max="60" step="0.2" value="38.4" oninput="RigoraApp.onSimParamChange()">
+              </div>
+
+              <!-- 3. Custo por Hectare -->
+              <div class="sim-field">
+                <div class="sim-field-header">
+                  <label class="sim-field-label" for="sim-input-cost-ha">Custo por Hectare (R$/ha)</label>
+                  <span class="sim-field-val-display" id="disp-sim-cost-ha">R$ 9.700</span>
+                </div>
+                <input type="range" id="sim-input-cost-ha" class="sim-slider" min="5000" max="18000" step="100" value="9700" oninput="RigoraApp.onSimParamChange()">
+              </div>
+
+              <!-- 4. Preço Estimado por Saca -->
+              <div class="sim-field">
+                <div class="sim-field-header">
+                  <label class="sim-field-label" for="sim-input-price">Preço da Saca (R$/sc 60kg)</label>
+                  <span class="sim-field-val-display" id="disp-sim-price">R$ 1.250</span>
+                </div>
+                <input type="range" id="sim-input-price" class="sim-slider" min="700" max="2000" step="25" value="1250" oninput="RigoraApp.onSimParamChange()">
+              </div>
+
+              <!-- 5. Variação Percentual dos Custos -->
+              <div class="sim-field">
+                <div class="sim-field-header">
+                  <label class="sim-field-label" for="sim-input-cost-var">Variação Percentual dos Custos (%)</label>
+                  <span class="sim-field-val-display" id="disp-sim-cost-var">0%</span>
+                </div>
+                <input type="range" id="sim-input-cost-var" class="sim-slider" min="-30" max="30" step="1" value="0" oninput="RigoraApp.onSimParamChange()">
+              </div>
+
+              <!-- Presets Rápidos -->
+              <div style="display: flex; gap: 8px; margin-top: 6px;">
+                <button class="btn-secondary" style="flex: 1; font-size: 12px; padding: 6px;" onclick="RigoraApp.applySimPreset('conservative')">
+                  Cenário Conservador
+                </button>
+                <button class="btn-secondary" style="flex: 1; font-size: 12px; padding: 6px;" onclick="RigoraApp.applySimPreset('optimistic')">
+                  Cenário Otimista
+                </button>
+              </div>
+            </div>
+
+            <!-- Coluna de Resultados / Gráfico Comparativo -->
+            <div class="simulator-results">
+              <div class="sim-kpi-row">
+                <div class="sim-metric-card">
+                  <div class="sim-metric-label">Produção Estimada</div>
+                  <div class="sim-metric-value" id="sim-res-production">1.632 sc</div>
+                  <div class="sim-metric-delta" id="sim-res-production-delta">Ref: 1.632 sc</div>
+                </div>
+
+                <div class="sim-metric-card">
+                  <div class="sim-metric-label">Receita Bruta Estimada</div>
+                  <div class="sim-metric-value" id="sim-res-revenue">R$ 2.040.000</div>
+                  <div class="sim-metric-delta" id="sim-res-revenue-delta">Ref: R$ 2.040.000</div>
+                </div>
+
+                <div class="sim-metric-card">
+                  <div class="sim-metric-label">Custo Total Simulado</div>
+                  <div class="sim-metric-value" id="sim-res-cost">R$ 412.250</div>
+                  <div class="sim-metric-delta" id="sim-res-cost-delta">Ref: R$ 412.250</div>
+                </div>
+
+                <div class="sim-metric-card" style="border-left: 4px solid var(--color-secondary);">
+                  <div class="sim-metric-label">Resultado Operacional Est.</div>
+                  <div class="sim-metric-value" id="sim-res-margin" style="color: var(--color-secondary);">R$ 1.627.750</div>
+                  <div class="sim-metric-delta" id="sim-res-margin-delta">Ref: R$ 1.627.750</div>
+                </div>
+              </div>
+
+              <!-- Gráfico Comparativo de Cenários -->
+              <div style="background-color: #FFFFFF; border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 16px;">
+                <div style="font-size: 13.5px; font-weight: 700; color: var(--color-primary); margin-bottom: 6px;">
+                  Comparativo: Cenário Base vs Cenário Simulado
+                </div>
+                <div class="chart-container" id="chart-sim-comparison"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- ==================================================================
+           TELA 4: AUTOMAÇÕES
+           ================================================================== -->
+      <main id="tab-automations" class="content-view">
+        <div class="demo-banner">
+          <div>
+            <strong>Regras de Automação Inteligente</strong> — Alertas operacionais baseados em limites de custo, estoques e condições meteorológicas.
+          </div>
+          <span class="demo-tag">Ambiente Demonstrativo</span>
+        </div>
+
+        <div class="automations-grid">
+          <!-- Regra 1: Custo Elevado -->
+          <div class="rule-card" id="card-rule-01">
+            <div>
+              <div class="rule-header">
+                <span class="status-pill info">Regra 1 • Financeiro</span>
+                <label class="switch">
+                  <input type="checkbox" id="switch-rule-1" checked onchange="RigoraApp.onRuleToggle('RULE-01', this.checked)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <h3 class="rule-title">Alerta de Custo Elevado por Hectare</h3>
+              
+              <div class="rule-body">
+                <p>Dispara aviso quando as despesas registradas da safra ultrapassam o teto operacional orçado.</p>
+                <div class="rule-condition-box">
+                  <strong>Condição:</strong> Custo / ha &gt; <span id="label-threshold-rule-1">R$ 10.500,00</span>
+                </div>
+                <div class="form-group" style="margin-top: 10px;">
+                  <label for="input-threshold-rule-1" style="font-size: 12px; color: var(--color-text-muted);">Ajustar Limite de Custo (R$/ha):</label>
+                  <input type="number" id="input-threshold-rule-1" class="form-input" style="padding: 7px 10px; font-size: 13px;" value="10500" step="100" onchange="RigoraApp.onRuleThresholdChange('RULE-01', this.value)">
+                </div>
+              </div>
+            </div>
+
+            <div class="rule-footer">
+              <span class="rule-last-trigger">Último disparo: 10/03 às 11:20</span>
+              <button class="btn-accent" style="padding: 8px 14px; font-size: 12.5px;" onclick="RigoraApp.testRule('RULE-01')">
+                Testar Regra
+              </button>
+            </div>
+          </div>
+
+          <!-- Regra 2: Estoque Baixo -->
+          <div class="rule-card" id="card-rule-02">
+            <div>
+              <div class="rule-header">
+                <span class="status-pill warning">Regra 2 • Insumos</span>
+                <label class="switch">
+                  <input type="checkbox" id="switch-rule-2" checked onchange="RigoraApp.onRuleToggle('RULE-02', this.checked)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <h3 class="rule-title">Aviso de Estoque Mínimo de Insumos</h3>
+              
+              <div class="rule-body">
+                <p>Gera notificação de reposição quando a quantidade de insumos críticos fica abaixo da reserva de segurança.</p>
+                <div class="rule-condition-box">
+                  <strong>Condição:</strong> Quantidade em estoque &lt; Reserva Mínima Cadastrada
+                </div>
+                <div style="font-size: 12px; color: var(--color-text-muted); margin-top: 8px;">
+                  Item Crítico Atual: <strong>Fertilizante NPK 20-00-20</strong> (18 sacas / Mínimo 25 sacas)
+                </div>
+              </div>
+            </div>
+
+            <div class="rule-footer">
+              <span class="rule-last-trigger">Último disparo: 08/03 às 09:15</span>
+              <button class="btn-accent" style="padding: 8px 14px; font-size: 12.5px;" onclick="RigoraApp.testRule('RULE-02')">
+                Testar Regra
+              </button>
+            </div>
+          </div>
+
+          <!-- Regra 3: Condição Climática -->
+          <div class="rule-card" id="card-rule-03">
+            <div>
+              <div class="rule-header">
+                <span class="status-pill success">Regra 3 • Fitossanitário</span>
+                <label class="switch">
+                  <input type="checkbox" id="switch-rule-3" checked onchange="RigoraApp.onRuleToggle('RULE-03', this.checked)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <h3 class="rule-title">Alerta Fitossanitário por Clima</h3>
+              
+              <div class="rule-body">
+                <p>Identifica riscos epidemiológicos para café arábica baseando-se na umidade relativa e janela de temperaturas favoráveis a pragas.</p>
+                <div class="rule-condition-box">
+                  <strong>Condição:</strong> Umidade Relativa &gt; 80% e Temp. Média entre 22°C e 26°C por mais de 5 dias
+                </div>
+                <div style="font-size: 12px; color: var(--color-text-muted); margin-top: 8px;">
+                  Alvo de Monitoramento: <strong>Ferrugem e Cercosporiose</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="rule-footer">
+              <span class="rule-last-trigger">Último disparo: 02/03 às 17:40</span>
+              <button class="btn-accent" style="padding: 8px 14px; font-size: 12.5px;" onclick="RigoraApp.testRule('RULE-03')">
+                Testar Regra
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Painel de Log de Execuções e Resultados do Teste -->
+        <div class="dashboard-card">
+          <div class="card-header-flex">
+            <div>
+              <h3 class="card-title">Console de Execução das Automações</h3>
+              <p class="card-subtitle">Histórico imediato de testes de regras com validação local de dados</p>
+            </div>
+            <button class="btn-secondary" style="font-size: 12px; padding: 4px 10px;" onclick="RigoraApp.clearRuleLog()">
+              Limpar Console
+            </button>
+          </div>
+
+          <div id="rule-test-console" style="background-color: #0F172A; color: #F1F5F9; border-radius: var(--radius-sm); padding: 18px; font-family: monospace; font-size: 13px; line-height: 1.6; min-height: 140px; max-height: 260px; overflow-y: auto;">
+            <div style="color: #64748B;">// Sistema de automação pronto. Clique em "Testar Regra" nos cards acima para executar diagnósticos locais.</div>
+          </div>
+        </div>
+      </main>
+
+      <!-- ==================================================================
+           TELA 5: FONTES DE DADOS
+           ================================================================== -->
+      <main id="tab-sources" class="content-view">
+        <div class="demo-banner">
+          <div>
+            <strong>Fontes de Dados & Integrações</strong> — Estrutura de dados públicos e registros de campo concebida para a Global Solution FIAP 2026.
+          </div>
+          <span class="demo-tag">Transparência CitizenTech</span>
+        </div>
+
+        <!-- Tabela das 4 Fontes de Dados -->
+        <div class="dashboard-card" style="margin-bottom: 28px;">
+          <div class="card-header-flex">
+            <div>
+              <h3 class="card-title">Catálogo de Fontes de Dados Integradas e Planejadas</h3>
+              <p class="card-subtitle">Mapeamento de origens públicas governamentais e registros locais da propriedade</p>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Fonte de Dados</th>
+                  <th>Tipo de Informação Agropecuária</th>
+                  <th>Período de Referência</th>
+                  <th>Status de Conexão</th>
+                  <th>Acesso Oficial</th>
+                </tr>
+              </thead>
+              <tbody id="data-sources-table-body">
+                <!-- Preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Card de Conexão com a Arquitetura da Global Solution 2026 -->
+        <div class="dashboard-card">
+          <div class="card-header-flex">
+            <h3 class="card-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              Conexão com o Pipeline Python e Arquitetura CitizenTech
+            </h3>
+            <span class="demo-tag">Global Solution 2026</span>
+          </div>
+
+          <div style="font-size: 13.5px; color: var(--color-text); line-height: 1.6; display: flex; flex-direction: column; gap: 14px;">
+            <p>
+              O <strong>Rigora Agro Intelligence</strong> foi estruturado de acordo com os pilares da <em>CitizenTech</em>: colocar a tecnologia e a análise de dados a serviço de quem mais precisa — os pequenos produtores rurais familiares e cafeicultores cooperados de Minas Gerais, que frequentemente não contam com equipes de ciência de dados ou softwares de alto custo.
+            </p>
+            <div style="background-color: var(--color-bg); border-left: 4px solid var(--color-secondary); padding: 14px 18px; border-radius: var(--radius-sm);">
+              <strong>Prontidão para Dados Reais:</strong> Este frontend MVP consome um contrato JSON de dados (ver arquivo <code>js/data.js</code>) perfeitamente compatível com o pipeline de extração, tratamento e consolidação desenvolvido em Python (notebooks com pandas/requests para as APIs públicas do IBGE SIDRA, Conab e INMET). Para atualizar os dados, basta plugar a saída estruturada do pipeline de dados.
+            </div>
+            <p style="color: var(--color-text-muted); font-size: 12.5px;">
+              * Não há atribuição de dados inventados às fontes oficiais. As fontes públicas estão devidamente marcadas como "Integração planejada" nesta versão de demonstração.
+            </p>
+          </div>
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL: NOVA ATIVIDADE / DESPESA (CADASTRO DEMONSTRATIVO EM MEMÓRIA)
+       ====================================================================== -->
+  <div class="modal-overlay" id="modal-activity">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Registrar Nova Atividade / Despesa</h3>
+        <button class="modal-close-btn" onclick="RigoraApp.closeNewActivityModal()" aria-label="Fechar Modal">&times;</button>
+      </div>
+
+      <form id="form-new-activity" onsubmit="event.preventDefault(); RigoraApp.submitNewActivity();">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="act-talhao">Talhão de Destino</label>
+            <select id="act-talhao" class="form-input" required>
+              <option value="T01">Talhão 01 - Encosta do Sol (Catuaí)</option>
+              <option value="T02">Talhão 02 - Chapadão Central (Bourbon)</option>
+              <option value="T03">Talhão 03 - Vereda Baixa (Mundo Novo)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="act-category">Categoria da Atividade</label>
+            <select id="act-category" class="form-input" required>
+              <option value="Fertilizantes e Corretivos">Fertilizantes e Corretivos</option>
+              <option value="Defensivos e Controle Biológico">Defensivos e Controle Biológico</option>
+              <option value="Mão de Obra e Colheita">Mão de Obra e Colheita</option>
+              <option value="Mecanização e Combustível">Mecanização e Combustível</option>
+              <option value="Energia, Manutenção e Outros">Energia, Manutenção e Outros</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="act-date">Data da Operação</label>
+            <input type="text" id="act-date" class="form-input" value="13/03/2026" required>
+          </div>
+
+          <div class="form-group">
+            <label for="act-desc">Descrição Detalhada</label>
+            <input type="text" id="act-desc" class="form-input" placeholder="Ex: Adubação de cobertura nitrogenada pós-chuva" required>
+          </div>
+
+          <div class="form-group">
+            <label for="act-cost">Valor Registrado (R$)</label>
+            <input type="number" id="act-cost" class="form-input" placeholder="Ex: 3500.00" step="50" min="10" required>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="RigoraApp.closeNewActivityModal()">Cancelar</button>
+          <button type="submit" class="btn-primary">Salvar Lançamento</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Contêiner de Notificações Toast -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts da Aplicação (Sem dependências externas) -->
+  <script src="js/data.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
